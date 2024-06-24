@@ -81,7 +81,8 @@ class App:
             pass
         
         else:
-            self.calc_distance()
+            if pyxel.frame_count % 2 == 0:
+                self.calc_distance()
 
             self.draw_baseUI()            
             
@@ -91,6 +92,9 @@ class App:
             self.draw_tsne_plot()
 
             pyxel.rectb(self.offset*2+self.scale, self.offset-20, 400, 400, 13)
+
+            # pca plot
+            self.draw_pca()
 
             # mouse pointer
             pyxel.blt(pyxel.mouse_x-8, pyxel.mouse_y-8, 0, 0, 0, 16, 16, 0)
@@ -108,9 +112,9 @@ class App:
     def draw_tsne_plot(self):
         # self.writer.draw(421, 36, "t-SNE plot", 30, 13)
         self.writer.draw(self.offset+self.scale-150, self.offset-20, "t-SNE plot", 30, 13)
-        self.writer.draw(self.offset-10, self.offset+30, "picked researcher: ", 20, 13)
         self.writer.draw(self.offset-10, self.offset-20, "circle size: ", 20, 13)
         self.writer.draw(self.offset, self.offset, str(int(self.dist_level*10)/10), 25, 13)
+        self.writer.draw(self.offset-10, self.offset+self.scale-30, "picked researcher: ", 20, 13)
 
         pyxel.rectb(self.offset-20, self.offset-20, self.scale+40, self.scale+40, 13)
         self.writer.draw(self.offset-20, self.offset+20+self.scale, str(int(self.one_min)), 20, 13)
@@ -122,22 +126,15 @@ class App:
         for i in range(len(self.tsne0_draw)):
             if base_df.at[i, "circle_distance"] < self.dist_level:
                 pyxel.circ(
-                    self.tsne0_draw[i]*self.scale + self.offset, 
-                    self.tsne1_draw[i]*self.scale + self.offset, 
+                    self.tsne0_draw[i]*self.scale + self.offset,
+                    self.offset+self.scale - self.tsne1_draw[i]*self.scale,
                     2,
                     6
                 )
             else:
-                # pyxel.rect(
-                #     self.tsne0_draw[i]*self.scale + self.offset, 
-                #     self.tsne1_draw[i]*self.scale + self.offset, 
-                #     3, 
-                #     3, 
-                #     13
-                # )
                 pyxel.circ(
                     self.tsne0_draw[i]*self.scale + self.offset, 
-                    self.tsne1_draw[i]*self.scale + self.offset, 
+                    self.offset+self.scale - self.tsne1_draw[i]*self.scale, 
                     2,
                     13
                 )
@@ -146,23 +143,47 @@ class App:
             if base_df.at[i, "highlight"] == 1:
                 pyxel.line(
                     self.tsne0_draw[i]*self.scale + self.offset, 
-                    self.tsne1_draw[i]*self.scale + self.offset, 
+                    self.offset+self.scale - self.tsne1_draw[i]*self.scale, 
                     pyxel.mouse_x,
                     pyxel.mouse_y,
                     8
                 )
                 pyxel.circb(
                     self.tsne0_draw[i]*self.scale + self.offset, 
-                    self.tsne1_draw[i]*self.scale + self.offset, 
+                    self.offset+self.scale - self.tsne1_draw[i]*self.scale,  
                     self.dist_level*25, # 円の大きさはdist_levelに合わせたいが，微妙にずれがある
                     6
                 )
                 # self.writer.draw(self.offset+1, self.offset+1, base_df.at[i, "職員名称"], 25, 13)
-                self.writer.draw(self.offset, self.offset+55, base_df.at[i, "職員名称"], 25, 13)
+                self.writer.draw(self.offset, self.offset+self.scale-10, base_df.at[i, "職員名称"], 25, 13)
+
+    def draw_pca(self):
+        pca_base_x = self.offset*2 + self.scale
+        pca_base_y = self.offset + self.scale/2 + 20
+        pca_width = 400
+
+        self.writer.draw(pca_base_x, pca_base_y, "PCA", 35, 13)
+        pyxel.rectb(pca_base_x, pca_base_y, pca_width, pca_width, 13)
+
+        for i in range(len(self.tsne0_draw)):
+            if base_df.at[i, "circle_distance"] < self.dist_level:
+                pyxel.circ(
+                    pca_base_x + self.pca0_draw[i]*self.scale/2,
+                    pca_base_y + self.scale/2 - self.pca1_draw[i]*self.scale/2,
+                    2,
+                    8
+                )
+            else:
+                pyxel.circ(
+                    pca_base_x + self.pca0_draw[i]*self.scale/2,
+                    pca_base_y + self.scale/2 - self.pca1_draw[i]*self.scale/2,
+                    1,
+                    13
+                )
         
     def calc_distance(self):
         # マウスポインタとプロット全ての距離を計算
-        base_df["distance"] = np.sqrt((self.tsne0_draw*800 + 100 - pyxel.mouse_x) ** 2 + (self.tsne1_draw*800+100 - pyxel.mouse_y) ** 2)
+        base_df["distance"] = np.sqrt((self.tsne0_draw*800 + 100 - pyxel.mouse_x) ** 2 + (900 - self.tsne1_draw*800 - pyxel.mouse_y) ** 2)
         # print(base_df["distance"].min())    # 最小値をprint
         # print(base_df["distance"].idxmin())
         base_df["highlight"] = 0
