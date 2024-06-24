@@ -192,7 +192,12 @@ class App:
         # こちらは選択中の研究者に対する距離の計算
         base_x = base_df.at[base_df["distance"].idxmin(), "tsne0"]
         base_y = base_df.at[base_df["distance"].idxmin(), "tsne1"]
-        base_df["circle_distance"] = np.sqrt((base_x - base_df["tsne0"]) ** 2 + (base_y - base_df["tsne1"]) ** 2)
+        base_z = base_df.at[base_df["distance"].idxmin(), "tsne2"]
+        base_df["circle_distance"] = np.sqrt(
+            (base_x - base_df["tsne0"]) ** 2 + \
+            (base_y - base_df["tsne1"]) ** 2 + \
+            (base_z - base_df["tsne2"]) ** 2
+            )
             
 
     def save_data(self):
