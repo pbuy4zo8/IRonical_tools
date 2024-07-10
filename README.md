@@ -10,3 +10,5 @@ pyxel-universal-font==1.1.1
 pip install pyxel
 pip install pyxel-universal-font
 ```
+
+![sample image](./ironical_tool.png)  
