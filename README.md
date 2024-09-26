@@ -1,14 +1,15 @@
-# IRonical_tools
-分析に使用するツールの公開・更新用リポジトリ．
+# このリポジトリは...
+研究IRに用いている様々なツール，スクリプト群をまとめたもの．  
 
-## requirements
-pyxel==2.0.9  
-pyxel-universal-font==1.1.1
-  
-以下のコマンドでライブラリのインストールができる．  
-```
-pip install pyxel
-pip install pyxel-universal-font
-```
+## GUI_tools
+特定の処理や計算の実行をGUI環境で視覚的に行えるツール群．  
 
-![sample image](./ironical_tool.png)  
+## predictions
+科研費データベースから出力できるcsvデータに推定した年齢，学系，性別情報を追加するスクリプト群．  
+悪用なきこと．  
+
+## IRonicalとは
+複雑な処理や計算を誰でも簡単に使えるようにラッピングした，皮肉(irony)を文字通り体現したツール，サービスのこと．  
+
+## ライセンス
+apache2.0を適用しています．問題がある場合にはご連絡をお願い致します．  
