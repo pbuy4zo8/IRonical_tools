@@ -11,19 +11,7 @@ st.write("岡山大学 研究・イノベーション共創機構　URA/IRで作
 st.write("各サービスは自由に幅広く利用・活用できます．")
 st.write("")
 st.write("")
-
-col1, col2, col3 = st.columns(3)
-col1.metric(label="Users", value=3, delta="2")
-col2.metric(label="Access count", value=11, delta="-1%")
-col3.metric(label="CPU Usage", value="17%", delta="2%")
-
 st.write("")
-
-# input_num = st.text_input("enter passcode to use", "")
-# if input_num == "0000":
-#     st.sidebar.write("test")
-#     st.sidebar.write("test")
-
 st.write("")
 st.write("")
 st.markdown(
