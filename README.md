@@ -1,6 +1,9 @@
 # このリポジトリは...
 研究IRに用いている様々なツール，スクリプト群をまとめたもの．  
 
+## IRonical_public
+IRonicalの公開版です．streamlitライブラリを使用し，[predictinos](https://github.com/pbuy4zo8/IRonical_tools/tree/main/predictions)の年齢推定を，誰でも使えるようなGUIに仕上げています．  
+  
 ## GUI_tools
 特定の処理や計算の実行をGUI環境で視覚的に行えるツール群．  
 
