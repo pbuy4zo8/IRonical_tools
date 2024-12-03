@@ -1,7 +1,9 @@
 # IRonical_public
 IRonicalの公開版です．streamlitライブラリを使用し，年齢推定モデルと2D・3Dプロッターを包みこんでいます．  
 お手元のPCにダウンロードして頂き，requirementsにあるライブラリをインストールしてお使いください．  
-![image](./IRonical_img.png)
+<div align="center">
+  <img src="./IRonical_img.png" width="50%">
+</div>
 
 
 ### requirements
