@@ -13,8 +13,9 @@ streamlit run main.py
 ```
 
 ### requirements
-tensorflow 2.18.0  
-pandas 2.2.3  
-numpy 2.0.2  
-pillow 10.4.0  
+steamlit >= 1.39.0
+tensorflow == 2.18.0  
+pandas >= 2.2.3  
+numpy >= 2.0.2  
+pillow >= 10.4.0  
 (足りなかった場合には都度インストールをお願い致します．)
