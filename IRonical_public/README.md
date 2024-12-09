@@ -13,7 +13,7 @@ streamlit run main.py
 ```
 
 ### requirements
-steamlit >= 1.39.0
+steamlit >= 1.39.0  
 tensorflow == 2.18.0  
 pandas >= 2.2.3  
 numpy >= 2.0.2  
